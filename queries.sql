@@ -44,3 +44,13 @@ SELECT AVG(weight_kg) FROM animals;
 SELECT name, escape_attempts FROM animals WHERE escape_attempts = (select MAX(escape_attempts) FROM animals);
 SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
 SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-12-31' AND '2000-01-01' GROUP BY species;
+
+
+/*RUBY - WEEK 1 - PROJECT 3*/
+SELECT full_name AS Name, name AS animal FROM owners O JOIN animals A ON O.full_name = A.owner_id WHERE full_name = 'Melody Pond';
+SELECT A.name AS Animal, S.name AS Species FROM species S JOIN animals A ON S.name = A.species_id WHERE S.name = 'Pokemon';
+SELECT full_name AS Name, name AS animal FROM owners O FULL OUTER JOIN animals A ON O.full_name = A.owner_id;
+SELECT S.name AS Species, COUNT(A.species_id) FROM species S JOIN animals A ON S.name = A.species_id GROUP BY S.name;
+SELECT O.full_name AS Name, A.name AS Animal, S.name AS Species FROM species S JOIN animals A ON S.name = A.species_id JOIN owners O ON O.full_name = A.owner_id WHERE S.name = 'Digimon' AND O.full_name = 'Jennifer Orwell';
+SELECT O.full_name AS Name, A.name AS Animal FROM owners O JOIN animals A ON O.full_name = A.owner_id WHERE O.full_name = 'Dean Winchester' AND A.escape_attempts = 0;
+SELECT O.full_name AS Name, COUNT(A.owner_id) AS Occurrence FROM owners O JOIN animals A ON O.full_name = A.owner_id GROUP BY O.full_name ORDER BY Occurrence DESC LIMIT 1;
