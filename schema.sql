@@ -59,3 +59,47 @@ ALTER TABLE animals
 ADD CONSTRAINT fk_owner
 FOREIGN KEY (owner_id)
 REFERENCES owners(full_name);
+
+
+/*RUBY - WEEK 1 - PROJECT 4*/
+CREATE TABLE vets(
+	id INT GENERATED ALWAYS AS IDENTITY,
+	name VARCHAR(250),
+	age INT,
+	date_of_graduation DATE,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE specializations(
+	vets_id INT,
+	species_id INT
+);
+
+ALTER TABLE specializations
+ADD CONSTRAINT fk_specializations_vets
+FOREIGN KEY (vets_id)
+REFERENCES vets(id);
+
+ALTER TABLE species
+ADD PRIMARY KEY(id);
+
+ALTER TABLE specializations
+ADD CONSTRAINT fk_specializations_species
+FOREIGN KEY (species_id)
+REFERENCES species(id);
+
+CREATE TABLE visits(
+	vets_id INT,
+	animals_id INT,
+	date_of_visit DATE
+);
+
+ALTER TABLE visits
+ADD CONSTRAINT fk_visits_vets
+FOREIGN KEY (vets_id)
+REFERENCES vets(id);
+
+ALTER TABLE visits
+ADD CONSTRAINT fk_visits_animals
+FOREIGN KEY (animals_id)
+REFERENCES animals(id);
